@@ -89,5 +89,4 @@ const Navbar = () => {
   );
 };
 
-//This
 export default Navbar;
