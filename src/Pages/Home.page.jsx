@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DefaultLayoutHOC from "../Layout/Default.Layout";
+import axios from "axios";
 
 //Components
 import EntertainmentCardComponent from "../components/Entertainment/EntertainmentCardComponent";
@@ -10,6 +11,17 @@ const HomePage = () => {
   const [recommondedMovies, setRecommondedMovies] = useState([]);
   const [premierMovies, setPremierMovies] = useState([]);
   const [onlineStreamEvents, setOnlineStreamEvents] = useState([]);
+
+  useEffect(() => {
+    const requestTopRatedMovies = async () => {
+      const getTopRatedMovies = await axios.get(
+        "https://api.themoviedb.org/3/movie/top_rated?api_key=3052f3dd38b04949888d184843802e30"
+      );
+      setRecommondedMovies(getTopRatedMovies.data.results);
+    };
+    requestTopRatedMovies();
+  }, []);
+
   return (
     <>
       <HeroCarouselComponent />
